@@ -2,6 +2,7 @@ package org.uvsq.datascale.alexandria.domain;
 
 import java.util.Date;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -12,11 +13,15 @@ public class Author {
 	@Id
 	@GeneratedValue
 	private Long id;
-	
 	private String firstname;
 	private String lastname;
-	private Date birthDate;
 	
+	@Embedded
+	private Biography biography;
+	
+	public Long getId() {
+		return id;
+	}
 	public String getFirstname() {
 		return firstname;
 	}
@@ -29,13 +34,11 @@ public class Author {
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
-	public Date getBirthDate() {
-		return birthDate;
+	public Biography getBiography() {
+		return biography;
 	}
-	public void setBirthDate(Date date) {
-		this.birthDate = date;
+	public void setBiography(Biography biography) {
+		this.biography = biography;
 	}
-	public Long getId() {
-		return id;
-	}
+	
 }

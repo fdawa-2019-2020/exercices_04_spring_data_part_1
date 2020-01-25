@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.Transactional;
 import org.uvsq.datascale.alexandria.domain.Author;
+import org.uvsq.datascale.alexandria.domain.Biography;
 import org.uvsq.datascale.alexandria.repository.AuthorRepository;
 
 @Configuration
@@ -31,7 +32,14 @@ public class DataLoaderConfig {
 				Author victor = new Author();
 				victor.setFirstname("Victor");
 				victor.setLastname("Hugo");
-				victor.setBirthDate(simpleDateFormat.parse("1802-02-26"));
+				Biography biography = new Biography();
+				biography.setBirthCityName("BESANCON");
+				biography.setBirthDate(simpleDateFormat.parse("1802-1-26"));
+				biography.setDeathCityName("Paris");
+				biography.setDeathDate(simpleDateFormat.parse("1885-05-22"));
+				biography.setText("He lived!");
+				victor.setBiography(biography);
+
 				saveAuthor(victor, authorRepository);
 			}
 		};
