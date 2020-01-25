@@ -1,5 +1,6 @@
 package org.uvsq.datascale.alexandria.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,7 +15,7 @@ public class Author {
 	private String firstname;
 	private String lastname;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Biography biography;
 
 	public Long getId() {
