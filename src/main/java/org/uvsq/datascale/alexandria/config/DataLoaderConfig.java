@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.Transactional;
 import org.uvsq.datascale.alexandria.domain.Author;
+import org.uvsq.datascale.alexandria.repository.AuthorRepository;
 
 @Configuration
 public class DataLoaderConfig {
@@ -19,7 +20,7 @@ public class DataLoaderConfig {
 	private static Logger logger = LoggerFactory.getLogger(DataLoaderConfig.class);
 	
 	@Bean
-	public ApplicationRunner authorLoader(EntityManager entityManager) {
+	public ApplicationRunner authorLoader(AuthorRepository authorRepository) {
 		return new ApplicationRunner() {
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			
@@ -31,12 +32,12 @@ public class DataLoaderConfig {
 				victor.setFirstname("Victor");
 				victor.setLastname("Hugo");
 				victor.setBirthDate(simpleDateFormat.parse("1802-02-26"));
-				saveAuthor(victor, entityManager);
+				saveAuthor(victor, authorRepository);
 			}
 		};
 	}
 
-	protected void saveAuthor(Author victor, EntityManager entityManager) {
-		entityManager.persist(victor);
+	protected void saveAuthor(Author victor, AuthorRepository repository) {
+		repository.save(victor);
 	}
 }
