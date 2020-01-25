@@ -2,10 +2,16 @@ package org.uvsq.datascale.alexandria.domain;
 
 import java.util.Date;
 
-import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
-@Embeddable
+@Entity
 public class Biography {
+	
+	@Id
+	@GeneratedValue
+	private Long id;
 
 	private Date birthDate;
 	private Date deathDate;
@@ -44,5 +50,11 @@ public class Biography {
 		this.text = text;
 	}
 	
+	public Long getId() {
+		return id;
+	}
 	
+	public void setId(Long id) {
+		this.id = id;
+	}
 }
