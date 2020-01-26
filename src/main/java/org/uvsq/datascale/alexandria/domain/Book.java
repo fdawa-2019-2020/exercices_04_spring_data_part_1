@@ -22,6 +22,10 @@ public class Book {
 	@OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
 	private Set<Edition> editions = new HashSet<>();
 
+	@ManyToMany
+	private Set<Author> authors = new HashSet<>();
+
+	
 	public Long getId() {
 		return id;
 	}
@@ -44,6 +48,14 @@ public class Book {
 
 	public void setEditions(Set<Edition> editions) {
 		this.editions = editions;
+	}
+	
+	public Set<Author> getAuthors() {
+		return authors;
+	}
+	
+	public void setAuthors(Set<Author> authors) {
+		this.authors = authors;
 	}
 	
 	

@@ -1,6 +1,7 @@
 package org.uvsq.datascale.alexandria.domain;
 
 import java.util.Date;
+import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -65,4 +66,23 @@ public class Biography {
 	public void setAuthor(Author author) {
 		this.author = author;
 	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(birthCityName, birthDate, deathCityName, deathDate);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Biography other = (Biography) obj;
+		return Objects.equals(birthCityName, other.birthCityName) && Objects.equals(birthDate, other.birthDate)
+				&& Objects.equals(deathCityName, other.deathCityName) && Objects.equals(deathDate, other.deathDate);
+	}
+	
+	
 }
