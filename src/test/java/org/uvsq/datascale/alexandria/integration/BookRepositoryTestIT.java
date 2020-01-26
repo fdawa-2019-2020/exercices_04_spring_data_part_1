@@ -4,6 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -82,6 +85,50 @@ public class BookRepositoryTestIT {
 		bookRepository.saveAndFlush(book);
 		
 		assertThat(editionRepository.count()).isEqualTo(1);
+	}
+	
+
+	@Test
+	public void testFindByTitle() {
+		List<Book> booksToSave = generateBookToSave();
+		bookRepository.saveAll(booksToSave);
+
+		// When
+		List<Book> books = bookRepository.findByTitle("Foo");
+				
+		// Then
+		assertThat(books.size()).isEqualTo(1);
+		assertThat(books.stream().map(Book::getTitle).findFirst().get()).isEqualTo("Foo");
+	}
+
+
+
+	@Test
+	public void testFindByTitleContainingIgnoreCase() {
+		List<Book> booksToSave = generateBookToSave();
+		bookRepository.saveAll(booksToSave);
+
+		// When
+		List<Book> books = bookRepository.findByTitleIsContainingIgnoreCase("oo");
+				
+		// Then
+		assertThat(books.size()).isEqualTo(2);
+		assertThat(books.stream().map(Book::getTitle).collect(Collectors.toList())).contains("Ooops", "Foo");
+	}
+
+
+
+
+	private List<Book> generateBookToSave() {
+		// given
+		return Arrays.asList("Foo","Bar","Ooops")
+					.stream().map( name -> {
+								Book book = new Book();
+								book.setTitle(name);
+								return book;
+					})
+					.collect(Collectors.toList());
+				
 	}
 
 }
