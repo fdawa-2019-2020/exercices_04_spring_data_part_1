@@ -1,6 +1,7 @@
 package org.uvsq.datascale.alexandria.domain;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -57,6 +58,25 @@ public class Book {
 	public void setAuthors(Set<Author> authors) {
 		this.authors = authors;
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(editions, title);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Book other = (Book) obj;
+		return Objects.equals(editions, other.editions) && Objects.equals(title, other.title);
+	}
+	
+	
 	
 	
 }
