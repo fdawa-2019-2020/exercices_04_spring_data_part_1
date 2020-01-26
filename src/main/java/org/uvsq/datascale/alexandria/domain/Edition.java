@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Edition {
@@ -16,6 +17,9 @@ public class Edition {
 	private String editorName;
 	private Integer numberOfPage;
 	private Boolean available;
+	
+	@ManyToOne
+	private Book book;
 	
 	public Long getId() {
 		return id;

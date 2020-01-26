@@ -17,8 +17,7 @@ public class Book {
 	private Long id;
 	private String title;
 	
-	@OneToMany
-	@JoinColumn(name = "book_id")
+	@OneToMany(mappedBy = "book")
 	private Set<Edition> editions = new HashSet<>();
 
 	public Long getId() {
