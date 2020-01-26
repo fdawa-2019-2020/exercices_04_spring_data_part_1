@@ -52,17 +52,15 @@ public class Author {
 	public void setBiography(Biography biography) {
 		this.biography = biography;
 	}
-	
-	
-	@Override
-	public int hashCode() {
-		return Objects.hash(biography, books, firstname, lastname);
-	}
-	
+		
 	public Set<Book> getBooks() {
 		return books;
 	}
-	
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(biography, firstname, lastname);
+	}
 
 	@Override
 	public boolean equals(Object obj) {
@@ -73,9 +71,11 @@ public class Author {
 		if (getClass() != obj.getClass())
 			return false;
 		Author other = (Author) obj;
-		return Objects.equals(biography, other.biography) && Objects.equals(books, other.books)
-				&& Objects.equals(firstname, other.firstname) && Objects.equals(lastname, other.lastname);
+		return Objects.equals(biography, other.biography) && Objects.equals(firstname, other.firstname)
+				&& Objects.equals(lastname, other.lastname);
 	}
+	
+
 
 
 
