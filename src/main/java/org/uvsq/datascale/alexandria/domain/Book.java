@@ -1,10 +1,12 @@
 package org.uvsq.datascale.alexandria.domain;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -16,7 +18,8 @@ public class Book {
 	private String title;
 	
 	@OneToMany
-	private Set<Edition> editions;
+	@JoinColumn(name = "book_id")
+	private Set<Edition> editions = new HashSet<>();
 
 	public Long getId() {
 		return id;

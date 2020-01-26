@@ -11,6 +11,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.uvsq.datascale.alexandria.domain.Book;
 import org.uvsq.datascale.alexandria.domain.Edition;
 import org.uvsq.datascale.alexandria.repository.BookRepository;
+import org.uvsq.datascale.alexandria.repository.EditionRepository;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
@@ -19,6 +20,8 @@ public class BookRepositoryTestIT {
 	
 	@Autowired
 	BookRepository bookRepository;
+	@Autowired
+	EditionRepository editionRepository;
 	
 	SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -37,6 +40,7 @@ public class BookRepositoryTestIT {
 		// when
 		book.getEditions().add(edition);
 		// then
+		editionRepository.save(edition);
 		bookRepository.saveAndFlush(book);
 	}
 }
