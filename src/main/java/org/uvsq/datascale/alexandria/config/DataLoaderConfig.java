@@ -2,6 +2,8 @@ package org.uvsq.datascale.alexandria.config;
 
 import java.text.SimpleDateFormat;
 
+import javax.persistence.EntityManager;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.ApplicationArguments;
@@ -12,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.uvsq.datascale.alexandria.domain.Author;
 import org.uvsq.datascale.alexandria.domain.Biography;
 import org.uvsq.datascale.alexandria.repository.AuthorRepository;
+import org.uvsq.datascale.alexandria.repository.BiographyRepository;
 
 @Configuration
 public class DataLoaderConfig {
@@ -19,7 +22,7 @@ public class DataLoaderConfig {
 	private static Logger logger = LoggerFactory.getLogger(DataLoaderConfig.class);
 	
 	@Bean
-	public ApplicationRunner authorLoader(AuthorRepository authorRepository) {
+	public ApplicationRunner authorLoader(AuthorRepository authorRepository, BiographyRepository biographyRepository) {
 		return new ApplicationRunner() {
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			
@@ -39,8 +42,12 @@ public class DataLoaderConfig {
 				victor.setBiography(biography);
 
 				authorRepository.save(victor);
+				biographyRepository.save(biography);
 			}
 		};
 	}
 
+	protected void saveAuthor(Author victor, AuthorRepository repository) {
+		repository.save(victor);
+	}
 }

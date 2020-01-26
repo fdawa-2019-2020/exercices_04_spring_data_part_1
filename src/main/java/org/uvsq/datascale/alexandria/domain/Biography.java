@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Biography {
@@ -18,6 +19,9 @@ public class Biography {
 	private String birthCityName;
 	private String deathCityName;
 	private String text;
+	
+	@OneToOne
+	private Author author;
 	
 	public Date getBirthDate() {
 		return birthDate;
@@ -49,12 +53,16 @@ public class Biography {
 	public void setText(String text) {
 		this.text = text;
 	}
-	
 	public Long getId() {
 		return id;
 	}
-	
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public Author getAuthor() {
+		return author;
+	}
+	public void setAuthor(Author author) {
+		this.author = author;
 	}
 }

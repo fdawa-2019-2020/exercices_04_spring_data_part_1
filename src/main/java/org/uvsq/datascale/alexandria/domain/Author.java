@@ -15,7 +15,7 @@ public class Author {
 	private String firstname;
 	private String lastname;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	private Biography biography;
 
 	public Long getId() {
