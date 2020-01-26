@@ -1,6 +1,7 @@
 package org.uvsq.datascale.alexandria.domain;
 
 import java.util.Date;
+import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -51,6 +52,23 @@ public class Edition {
 	public void setAvailable(Boolean available) {
 		this.available = available;
 	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(available, editorName, numberOfPage, parutionDate);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Edition other = (Edition) obj;
+		return Objects.equals(available, other.available) && Objects.equals(editorName, other.editorName)
+				&& Objects.equals(numberOfPage, other.numberOfPage) && Objects.equals(parutionDate, other.parutionDate);
+	}
+	
 	
 	
 

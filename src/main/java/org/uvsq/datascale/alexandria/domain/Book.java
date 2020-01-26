@@ -3,10 +3,12 @@ package org.uvsq.datascale.alexandria.domain;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -17,7 +19,7 @@ public class Book {
 	private Long id;
 	private String title;
 	
-	@OneToMany(mappedBy = "book")
+	@OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
 	private Set<Edition> editions = new HashSet<>();
 
 	public Long getId() {

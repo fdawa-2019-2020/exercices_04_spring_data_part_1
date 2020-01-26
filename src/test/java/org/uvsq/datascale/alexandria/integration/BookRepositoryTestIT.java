@@ -1,5 +1,7 @@
 package org.uvsq.datascale.alexandria.integration;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -40,7 +42,46 @@ public class BookRepositoryTestIT {
 		// when
 		book.getEditions().add(edition);
 		// then
-		editionRepository.save(edition);
 		bookRepository.saveAndFlush(book);
+		assertThat(editionRepository.count()).isEqualTo(1);
 	}
+	
+	
+	
+	
+	
+	
+	@Test
+	public void createBookWithSameEditions() throws ParseException {
+		// given
+		Book book = new Book();
+		book.setTitle("Foo bar recettes");
+		// first add
+		{
+			Edition edition = new Edition();
+			edition.setAvailable(true);
+			edition.setEditorName("FooBarEdition");
+			edition.setParutionDate(simpleDateFormat.parse("2019-02-02"));
+			edition.setNumberOfPage(123);
+			// when
+			book.getEditions().add(edition);
+		}
+		// 2nd add
+		{
+			Edition edition = new Edition();
+			edition.setAvailable(true);
+			edition.setEditorName("FooBarEdition");
+			edition.setParutionDate(simpleDateFormat.parse("2019-02-02"));
+			edition.setNumberOfPage(123);
+			// when
+			book.getEditions().add(edition);			
+		}
+		
+		assertThat(book.getEditions().size()).isEqualTo(1);
+		// then
+		bookRepository.saveAndFlush(book);
+		
+		assertThat(editionRepository.count()).isEqualTo(1);
+	}
+
 }
